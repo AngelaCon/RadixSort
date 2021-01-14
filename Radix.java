@@ -28,7 +28,7 @@ public class Radix {
         int passes = 0;
         int size = data.size();
         for (int i = 0; i < size; i++) {
-            passes = Math.max(passes, data.get(0));
+            passes = Math.max(passes, Math.abs(data.get(0)));
             // if we remove the first index, then this would maintain O(n) since we're getting the first index each time
             data.add(data.remove(0));
         }
@@ -61,6 +61,7 @@ public class Radix {
         }
         radixSortSimple(pos);
         data.extend(pos);
+
         radixSortSimple(neg);
         //sort neg and then reverse it and then add to data with pos
         int negSize = neg.size();
@@ -68,7 +69,6 @@ public class Radix {
             data.add(0, neg.get(0));
             neg.remove(0);
         }
-        System.out.println(data);
     }
 
 
