@@ -15,4 +15,37 @@ public class Radix {
         if (n == 0) return 1;
         else return (int) (Math.log10(Math.abs(n)) + 1);
     }
+
+    public static void merge( SortableLinkedList original, SortableLinkedList[]buckets){
+        for (int i  = 0; i < buckets.length; i++){
+            original.extend(buckets[i]);
+        }
+    }
+
+    public static void radixSortSimple(SortableLinkedList data) {
+        SortableLinkedList buckets[] = new SortableLinkedList[10];
+        for (int i = 0; i <= 9; i++) buckets[i] = new SortableLinkedList();
+        int passes = 0;
+        int size = data.size();
+        for (int i = 0; i < size; i++) {
+            passes = Math.max(passes, data.get(0));
+            // if we remove the first index, then this would maintain O(n) since we're getting the first index each time
+            data.add(data.remove(0));
+        }
+        passes = length(passes);
+        // we're gonnna be looping from 0 to one less than passes
+        for (int digit=0; digit < passes; digit++) {
+            for (int i = 0; i < size; i++) {
+                buckets[nth(data.get(0), digit)].add(data.get(i));
+                data.get(i) = data.remove(0);
+            }
+        }
+
+
+    }
+
+
+
+
+
 }
