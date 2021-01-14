@@ -48,16 +48,28 @@ public class Radix {
         SortableLinkedList pos = new SortableLinkedList();
         SortableLinkedList neg = new SortableLinkedList();
         // fill em up
-        for (int i = 0; i < data.size(); i++) {
-            pos.add(data.get(0));
-            data.add(data.remove(0));
+        int size = data.size();
+        for (int i = 0; i < size; i++) {
+            if (data.get(0) > 0) {
+                pos.add(data.get(0));
+                data.remove(0);
+            }
+            else {
+                neg.add(data.get(0));
+                data.remove(0);
+            }
         }
         radixSortSimple(pos);
-
-
+        data.extend(pos);
+        radixSortSimple(neg);
+        //sort neg and then reverse it and then add to data with pos
+        int negSize = neg.size();
+        for (int i = 0; i < negSize; i++) {
+            data.add(0, neg.get(0));
+            neg.remove(0);
+        }
+        System.out.println(data);
     }
-
-
 
 
 
