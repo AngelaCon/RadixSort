@@ -8,14 +8,11 @@ public class Radix {
 
     }
     public static int nth(int n, int col) {
-        n = Math.abs(n);
-        String num = "" +n;
-        if (col == 0) return Character.getNumericValue(num.charAt(num.length()-1));
-        return Character.getNumericValue(num.charAt(num.length()-col-1));
-
+        return (Math.abs(n) / (int)(Math.pow(10, col))) % 10;
     }
 
-    // public static int length(int n) {
-    //
-    // }
+    public static int length(int n) {
+        if (n == 0) return 1;
+        else return (int) (Math.log10(Math.abs(n)) + 1);
+    }
 }
