@@ -36,10 +36,23 @@ public class Radix {
         // we're gonnna be looping from 0 to one less than passes
         for (int digit=0; digit < passes; digit++) {
             for (int i = 0; i < size; i++) {
-                buckets[nth(data.get(0), digit)].add(data.get(i));
-                data.get(i) = data.remove(0);
+                buckets[nth(data.get(0), digit)].add(data.get(0));
+                data.remove(0);
+                //use same method we did before where we only take first index,keeping it as constant
             }
+            merge(data, buckets);
         }
+    }
+
+    public static void radixSort(SortableLinkedList data){
+        SortableLinkedList pos = new SortableLinkedList();
+        SortableLinkedList neg = new SortableLinkedList();
+        // fill em up
+        for (int i = 0; i < data.size(); i++) {
+            pos.add(data.get(0));
+            data.add(data.remove(0));
+        }
+        radixSortSimple(pos);
 
 
     }
